@@ -130,7 +130,7 @@
             this.urlBox.Name = "urlBox";
             this.urlBox.Size = new System.Drawing.Size(379, 21);
             this.urlBox.TabIndex = 1;
-            this.urlBox.Text = "/attendance/checkinoutApi/getMachineDetail";
+            this.urlBox.Text = "/项目名/Api/getMachineDetail";
             // 
             // DisConnect
             // 
@@ -257,7 +257,7 @@
             this.baseURLBox.Name = "baseURLBox";
             this.baseURLBox.Size = new System.Drawing.Size(379, 21);
             this.baseURLBox.TabIndex = 0;
-            this.baseURLBox.Text = "http://dk.bj.staff.xdf.cn";
+            this.baseURLBox.Text = "http://";
             // 
             // machineListView
             // 
