@@ -130,7 +130,7 @@
             this.urlBox.Name = "urlBox";
             this.urlBox.Size = new System.Drawing.Size(379, 21);
             this.urlBox.TabIndex = 1;
-            this.urlBox.Text = "/attendance/checkinoutApi/getAllMachineDetail";
+            this.urlBox.Text = "/attendance/checkinoutApi/getMachineDetail";
             // 
             // DisConnect
             // 
@@ -225,7 +225,7 @@
             this.textBoxMQPsw.PasswordChar = '*';
             this.textBoxMQPsw.Size = new System.Drawing.Size(88, 21);
             this.textBoxMQPsw.TabIndex = 5;
-            this.textBoxMQPsw.Text = "admin@4400!";
+            this.textBoxMQPsw.Text = "admin";
             // 
             // textBoxMQPort
             // 
@@ -249,7 +249,7 @@
             this.textBoxMQIP.Name = "textBoxMQIP";
             this.textBoxMQIP.Size = new System.Drawing.Size(93, 21);
             this.textBoxMQIP.TabIndex = 2;
-            this.textBoxMQIP.Text = "172.26.135.2";
+            this.textBoxMQIP.Text = "127.0.0.1";
             // 
             // baseURLBox
             // 
