@@ -4,7 +4,7 @@
   <description asmv2:iconFile="48X48.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="AttenanceRTEvents" version="1.0.7681.18935" language="neutral" processorArchitecture="amd64" />
+    <assemblyIdentity name="AttenanceRTEvents" version="1.0.7681.19941" language="neutral" processorArchitecture="amd64" />
     <commandLine file="AttenanceRTEvents.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AttenanceRTEvents.exe" size="90048">
-      <assemblyIdentity name="AttenanceRTEvents" version="1.0.7681.18935" language="neutral" processorArchitecture="amd64" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AttenanceRTEvents.exe" size="90560">
+      <assemblyIdentity name="AttenanceRTEvents" version="1.0.7681.19941" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>bjcrgAJZjQneImy2nFLIHBsuhL6JfWmrjBMssP3urTY=</dsig:DigestValue>
+        <dsig:DigestValue>icPBzuWZXOMfbz3zdJ/2qwI8rcqhRrpLB0YgOGb3h0s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -207,13 +207,13 @@
       <dsig:DigestValue>95U04eRs+52sOpWe6UW6lWKuEC29YWLUyi2a5PxPLwI=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="AttenanceRTEvents.exe.config" size="541">
+  <file name="AttenanceRTEvents.exe.config" size="911">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>K9iewfqwbJqc7zPsxJp3+eRAh82T83zLCsySDdpzR1Y=</dsig:DigestValue>
+      <dsig:DigestValue>FpyQ9mSQq99mxnI6+pgXvD23CxVZgtkNnRKUaDrYpMc=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
