@@ -15,6 +15,7 @@ using System.Collections;
 using RabbitMQ.Client;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace RTEvents
 {
@@ -24,6 +25,12 @@ namespace RTEvents
         {
             InitializeComponent();
             //初始化设备处理对象
+            baseURLBox.Text = ConfigurationManager.AppSettings["BasePath"];
+            urlBox.Text = ConfigurationManager.AppSettings["UrlPath"];
+            textBoxMQIP.Text = ConfigurationManager.AppSettings["MQHost"];
+            textBoxMQPort.Text = ConfigurationManager.AppSettings["MQPort"];
+            textBoxMQUser.Text = ConfigurationManager.AppSettings["MQUser"];
+            textBoxMQPsw.Text = ConfigurationManager.AppSettings["MQPassword"];
         }
 
         //Create Standalone SDK class dynamicly.
