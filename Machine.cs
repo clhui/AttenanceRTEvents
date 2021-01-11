@@ -369,7 +369,7 @@ namespace RTEvents
                 long intervalTime = 60 * 1000;//检测间隔 默认60秒
                 if (failCount > 0)
                 {
-                    //十次以下 每次加1分钟, 十分钟以上20分钟一次
+                    //十次以下 每次加1分钟, 十分钟以上20分钟一次 //////
                     intervalTime += failCount > 10 ? 20 * 60 * 1000 : failCount * 60 * 1000;
                 }
                 if (DateTime.UtcNow.Ticks - testTime > intervalTime*100000)
