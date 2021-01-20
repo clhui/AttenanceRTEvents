@@ -74,8 +74,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cacelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打开主窗体ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cacelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -356,22 +356,22 @@
             this.打开主窗体ToolStripMenuItem,
             this.cacelToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 48);
             this.contextMenuStrip1.Text = "菜单";
-            // 
-            // cacelToolStripMenuItem
-            // 
-            this.cacelToolStripMenuItem.Name = "cacelToolStripMenuItem";
-            this.cacelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.cacelToolStripMenuItem.Text = "退出程序";
-            this.cacelToolStripMenuItem.Click += new System.EventHandler(this.退出程序ToolStripMenuItem_Click);
             // 
             // 打开主窗体ToolStripMenuItem
             // 
             this.打开主窗体ToolStripMenuItem.Name = "打开主窗体ToolStripMenuItem";
-            this.打开主窗体ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.打开主窗体ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.打开主窗体ToolStripMenuItem.Text = "打开主窗体";
             this.打开主窗体ToolStripMenuItem.Click += new System.EventHandler(this.打开主窗体ToolStripMenuItem_Click);
+            // 
+            // cacelToolStripMenuItem
+            // 
+            this.cacelToolStripMenuItem.Name = "cacelToolStripMenuItem";
+            this.cacelToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.cacelToolStripMenuItem.Text = "退出程序";
+            this.cacelToolStripMenuItem.Click += new System.EventHandler(this.退出程序ToolStripMenuItem_Click);
             // 
             // RTEventsMain
             // 
@@ -389,6 +389,7 @@
             this.MaximizeBox = false;
             this.Name = "RTEventsMain";
             this.Text = "打卡机事件监听程序";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RTEventsMain_FormClosing_1);
             this.Load += new System.EventHandler(this.RTEventsMain_Load);
             this.SizeChanged += new System.EventHandler(this.RTEventsMain_SizeChanged);
             this.groupBox3.ResumeLayout(false);

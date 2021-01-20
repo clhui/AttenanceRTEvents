@@ -148,7 +148,7 @@ namespace RTEvents
                         //初始化设备
                         initMachineList();
                         //测试连接状态
-                        testConnect();
+                        testAllConnect();
                     }
                     catch (Exception ex)
                     {
@@ -231,7 +231,7 @@ namespace RTEvents
             return true;
         }
         //测试连接
-        public void testConnect()
+        public void testAllConnect()
         {
             List<string> delKey = new List<string>();
             //遍历方法二：遍历哈希表中的值
@@ -409,7 +409,8 @@ namespace RTEvents
             }
 
         }
-
+        /**设置退出缩小到托盘时使用
+         */
         private void RTEventsMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             // 取消关闭窗体
@@ -468,6 +469,12 @@ namespace RTEvents
                 this.Activate();
             }
 
+        }
+
+        private void RTEventsMain_FormClosing_1(object sender, FormClosingEventArgs e)
+        {
+
+            notifyIcon1.Visible = false; //托盘图标bu可见 
         }
 
         /// <summary>
