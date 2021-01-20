@@ -16,6 +16,7 @@ using RabbitMQ.Client;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using System.Configuration;
+using RabbitMQ.Client.Exceptions;
 
 namespace RTEvents
 {
@@ -74,22 +75,35 @@ namespace RTEvents
 
             Cursor = Cursors.WaitCursor;
             try {
-                bool mqConnectable = NetUtil.isHostConnectable(RabbitMQFactory.ip,RabbitMQFactory.mqport,2000);
+                bool mqConnectable = NetUtil.isHostConnectable(RabbitMQFactory.ip, RabbitMQFactory.mqport, 2000);
                 if (!mqConnectable) {
-                    this.ShowMessage("MQ连接参数有误异常：" );
+                    this.ShowMessage("MQ连接参数有误异常：");
+                    return;
+                }
+                var rabbitconnect = RabbitMQFactory.SharedConnection;
+                if (rabbitconnect == null) {
                     return;
                 }
                 //请求设备信息,初始化设备信息
-                //initMachineList();
+                bool getMachine = initMachineList();
+                if (!getMachine) {
+                    return;
+                }
                 rtTimer_Tick(null, null);
                 //testConnect();
                 testConnectTimer.Enabled = true;
                 testConnectTimer.Start();
                 lblState.Text = "当前状态:启动监听和心跳检测";
-
+                lblState.ForeColor = Color.GreenYellow;
+            }
+            catch (BrokerUnreachableException ex) {
+                this.ShowMessage("异常：MQ账号密码验证失败");
+                Console.Out.Write(ex.InnerException);
             }
             catch (Exception ex) {
-                this.ShowMessage("异常："+ex.Message);
+                this.ShowMessage("异常：" + ex.GetType());
+                Console.Out.Write(ex.InnerException);
+                lblState.ForeColor = Color.GreenYellow;
             }
             finally {
 
@@ -165,6 +179,7 @@ namespace RTEvents
                     testConnectTimer.Enabled = false;
                     testConnectTimer.Stop();
                     lblState.Text = "当前状态:停止监听事件";
+                    lblState.ForeColor = Color.Red;
                     //遍历方法二：遍历哈希表中的值
                     foreach (Machine machine in machineTable.Values)
                     {
@@ -185,14 +200,14 @@ namespace RTEvents
         }
 
         //初始化设备列表
-        public void initMachineList() {
+        public bool initMachineList() {
             RestClientManager restClientManager = new RestClientManager();
             string baseUrl = baseURLBox.Text;
             string url = urlBox.Text;
             JObject restResult =  restClientManager.Get(baseUrl, url, null);
             if (restResult.Count==0) {
                 ShowMessage("请求设备列表接口失败");
-                return;
+                return false;
             }
             if (restResult.GetValue("code").Value<int>() == 0)
             {
@@ -213,7 +228,7 @@ namespace RTEvents
                     }
                 }
             }
-
+            return true;
         }
         //测试连接
         public void testConnect()
@@ -296,7 +311,6 @@ namespace RTEvents
 
                     //ListViewItem item = machineListView.FindItemWithText(machine.getUid().ToString(), true, 0);
                     ListViewItem item = machineListView.Items[machine.getUid().ToString()];
-
                     item.SubItems[0].Text = machine.getMachinenumber().ToString();
                     item.SubItems[1].Text = machine.getMachinealias();
                     item.SubItems[2].Text = machine.getIp();
@@ -363,6 +377,96 @@ namespace RTEvents
 
         private void label1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void RTEventsMain_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            // 如果窗体最小化，则还原
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Show();
+                //设置程序允许显示在任务栏
+
+                this.ShowInTaskbar = true;
+
+                //设置窗口可见
+
+                this.Visible = true;
+
+                //设置窗口状态
+
+                this.WindowState = FormWindowState.Normal;
+
+                //设置窗口为活动状态，防止被其他窗口遮挡。
+
+                this.Activate();
+            }
+
+        }
+
+        private void RTEventsMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // 取消关闭窗体
+            e.Cancel = true;
+
+            // 将窗体变为最小化
+            this.WindowState = FormWindowState.Minimized;
+            this.ShowInTaskbar = false; //不显示在系统任务栏 
+            notifyIcon1.Visible = true; //托盘图标可见 
+            notifyIcon1.ShowBalloonTip(10);//显示气泡
+        }
+
+        private void 退出程序ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //退出
+            this.Close();
+            Application.Exit();
+        }
+
+        private void RTEventsMain_SizeChanged(object sender, EventArgs e)
+        {
+            //当点击最小化按钮时，执行操作
+
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                //将程序从任务栏移除显示
+                this.ShowInTaskbar = false;
+                //隐藏窗口
+                this.Visible = false;
+                //显示托盘图标
+                notifyIcon1.Visible = true;
+                notifyIcon1.ShowBalloonTip(10);//显示气泡
+            }
+        }
+
+        private void 打开主窗体ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // 如果窗体最小化，则还原
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Show();
+                //设置程序允许显示在任务栏
+
+                this.ShowInTaskbar = true;
+
+                //设置窗口可见
+
+                this.Visible = true;
+
+                //设置窗口状态
+
+                this.WindowState = FormWindowState.Normal;
+
+                //设置窗口为活动状态，防止被其他窗口遮挡。
+
+                this.Activate();
+            }
 
         }
 

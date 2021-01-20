@@ -47,7 +47,7 @@ namespace RTEvents
         private int idwErrorCode;
         private bool connected; //连接状态 1 连接  0未连接
         private String state; //当前状态
-
+        private bool registEvent = false;
 
         public Machine(RTEventsMain rtMain)
         {
@@ -428,9 +428,9 @@ namespace RTEvents
                                 //异常失败
                                 this.failCount += 1;
                                 this.testTime = DateTime.UtcNow.Ticks;
-                                this.disConnect();
                                 Console.WriteLine("心跳检测." + this.getMachinealias() + "重连失败" + this.failCount);
                                 this.rtMain.ShowMessage("心跳检测." + this.getMachinealias() + "重连失败" + this.failCount);
+                                this.disConnect();
                                 return false;
                             }
                         }
@@ -443,8 +443,11 @@ namespace RTEvents
                         this.testTime = DateTime.UtcNow.Ticks;
                         Console.WriteLine("心跳检测." + this.getMachinealias() + "重连失败" + this.failCount);
                         this.rtMain.ShowMessage("心跳检测." + this.getMachinealias() + "重连失败" + this.failCount);
+                        this.disConnect();
+                        return false;
                     }
                 }
+                //this.disConnect();
                 return false;
 
             }
@@ -454,24 +457,25 @@ namespace RTEvents
          * */
         public void disConnect()
         {
-            axCZKEM1.Disconnect();
 
-            this.axCZKEM1.OnConnected -= new zkemkeeper._IZKEMEvents_OnConnectedEventHandler(machineEvents.axCZKEM1_OnConnected);
-            this.axCZKEM1.OnDisConnected -= new zkemkeeper._IZKEMEvents_OnDisConnectedEventHandler(machineEvents.axCZKEM1_OnDisConnected);
-            this.axCZKEM1.OnFinger -= new zkemkeeper._IZKEMEvents_OnFingerEventHandler(machineEvents.axCZKEM1_OnFinger);
-            this.axCZKEM1.OnVerify -= new zkemkeeper._IZKEMEvents_OnVerifyEventHandler(machineEvents.axCZKEM1_OnVerify);
-            this.axCZKEM1.OnAttTransactionEx -= new zkemkeeper._IZKEMEvents_OnAttTransactionExEventHandler(machineEvents.axCZKEM1_OnAttTransactionEx);
-            this.axCZKEM1.OnFingerFeature -= new zkemkeeper._IZKEMEvents_OnFingerFeatureEventHandler(machineEvents.axCZKEM1_OnFingerFeature);
-            this.axCZKEM1.OnEnrollFingerEx -= new zkemkeeper._IZKEMEvents_OnEnrollFingerExEventHandler(machineEvents.axCZKEM1_OnEnrollFingerEx);
-            this.axCZKEM1.OnDeleteTemplate -= new zkemkeeper._IZKEMEvents_OnDeleteTemplateEventHandler(machineEvents.axCZKEM1_OnDeleteTemplate);
-            this.axCZKEM1.OnNewUser -= new zkemkeeper._IZKEMEvents_OnNewUserEventHandler(machineEvents.axCZKEM1_OnNewUser);
-            this.axCZKEM1.OnHIDNum -= new zkemkeeper._IZKEMEvents_OnHIDNumEventHandler(machineEvents.axCZKEM1_OnHIDNum);
-            this.axCZKEM1.OnAlarm -= new zkemkeeper._IZKEMEvents_OnAlarmEventHandler(machineEvents.axCZKEM1_OnAlarm);
-            this.axCZKEM1.OnDoor -= new zkemkeeper._IZKEMEvents_OnDoorEventHandler(machineEvents.axCZKEM1_OnDoor);
-            this.axCZKEM1.OnWriteCard -= new zkemkeeper._IZKEMEvents_OnWriteCardEventHandler(machineEvents.axCZKEM1_OnWriteCard);
-            this.axCZKEM1.OnEmptyCard -= new zkemkeeper._IZKEMEvents_OnEmptyCardEventHandler(machineEvents.axCZKEM1_OnEmptyCard);
+            //this.axCZKEM1.OnConnected -= new zkemkeeper._IZKEMEvents_OnConnectedEventHandler(machineEvents.axCZKEM1_OnConnected);
+            //this.axCZKEM1.OnDisConnected -= new zkemkeeper._IZKEMEvents_OnDisConnectedEventHandler(machineEvents.axCZKEM1_OnDisConnected);
+            //this.axCZKEM1.OnFinger -= new zkemkeeper._IZKEMEvents_OnFingerEventHandler(machineEvents.axCZKEM1_OnFinger);
+            //this.axCZKEM1.OnVerify -= new zkemkeeper._IZKEMEvents_OnVerifyEventHandler(machineEvents.axCZKEM1_OnVerify);
+            //this.axCZKEM1.OnAttTransactionEx -= new zkemkeeper._IZKEMEvents_OnAttTransactionExEventHandler(machineEvents.axCZKEM1_OnAttTransactionEx);
+            //this.axCZKEM1.OnFingerFeature -= new zkemkeeper._IZKEMEvents_OnFingerFeatureEventHandler(machineEvents.axCZKEM1_OnFingerFeature);
+            //this.axCZKEM1.OnEnrollFingerEx -= new zkemkeeper._IZKEMEvents_OnEnrollFingerExEventHandler(machineEvents.axCZKEM1_OnEnrollFingerEx);
+            //this.axCZKEM1.OnDeleteTemplate -= new zkemkeeper._IZKEMEvents_OnDeleteTemplateEventHandler(machineEvents.axCZKEM1_OnDeleteTemplate);
+            //this.axCZKEM1.OnNewUser -= new zkemkeeper._IZKEMEvents_OnNewUserEventHandler(machineEvents.axCZKEM1_OnNewUser);
+            //this.axCZKEM1.OnHIDNum -= new zkemkeeper._IZKEMEvents_OnHIDNumEventHandler(machineEvents.axCZKEM1_OnHIDNum);
+            //this.axCZKEM1.OnAlarm -= new zkemkeeper._IZKEMEvents_OnAlarmEventHandler(machineEvents.axCZKEM1_OnAlarm);
+            //this.axCZKEM1.OnDoor -= new zkemkeeper._IZKEMEvents_OnDoorEventHandler(machineEvents.axCZKEM1_OnDoor);
+            //this.axCZKEM1.OnWriteCard -= new zkemkeeper._IZKEMEvents_OnWriteCardEventHandler(machineEvents.axCZKEM1_OnWriteCard);
+            //this.axCZKEM1.OnEmptyCard -= new zkemkeeper._IZKEMEvents_OnEmptyCardEventHandler(machineEvents.axCZKEM1_OnEmptyCard);
             this.connected = false;
             this.rtMain.ShowMessage(machinealias + "设备断开连接!");
+
+            axCZKEM1.Disconnect();
         }
         /**
          * 连接
@@ -491,7 +495,7 @@ namespace RTEvents
                 //iMachineNumber = 1;//In fact,when you are using the tcp/ip communication,this parameter will be ignored,that is any integer will all right.Here we use 1.
 
                 //this.rtTimer.Enabled = true;
-                if (axCZKEM1.RegEvent(machinenumber, 65535))//Here you can register the realtime events that you want to be triggered(the parameters 65535 means registering all)
+                if (!registEvent && axCZKEM1.RegEvent(machinenumber, 65535))//Here you can register the realtime events that you want to be triggered(the parameters 65535 means registering all)
                 {
                     this.axCZKEM1.OnConnected += new zkemkeeper._IZKEMEvents_OnConnectedEventHandler(machineEvents.axCZKEM1_OnConnected);
                     this.axCZKEM1.OnDisConnected += new zkemkeeper._IZKEMEvents_OnDisConnectedEventHandler(machineEvents.axCZKEM1_OnDisConnected);
@@ -507,8 +511,8 @@ namespace RTEvents
                     this.axCZKEM1.OnDoor += new zkemkeeper._IZKEMEvents_OnDoorEventHandler(machineEvents.axCZKEM1_OnDoor);
                     this.axCZKEM1.OnWriteCard += new zkemkeeper._IZKEMEvents_OnWriteCardEventHandler(machineEvents.axCZKEM1_OnWriteCard);
                     this.axCZKEM1.OnEmptyCard += new zkemkeeper._IZKEMEvents_OnEmptyCardEventHandler(machineEvents.axCZKEM1_OnEmptyCard);
+                    machineEvents.rtEventsMain.ShowMessage(machinealias + "事件注册成功!");
                 }
-                machineEvents.rtEventsMain.ShowMessage(machinealias+"事件注册成功!");
                 return true;
             }
             else
