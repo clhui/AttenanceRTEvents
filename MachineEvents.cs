@@ -31,27 +31,27 @@ namespace RTEvents
         //当您将手指放在设备的传感器上时，将触发此事件
         public void axCZKEM1_OnDisConnected()
         {
-            rtEventsMain.ShowMessage(machine.getMachinealias() + "RTEvent 设备断开连接" );
+            rtEventsMain.ShowMessage(machine.getMachinealias() + ">RTEvent 设备断开连接" );
         }
 
         //当您将手指放在设备的传感器上时，将触发此事件
         public void axCZKEM1_OnFinger()
         {
-            rtEventsMain.ShowMessage(machine.getMachinealias() + "RTEvent OnFinger Has been Triggered" );
+            rtEventsMain.ShowMessage(machine.getMachinealias() + ">指纹验证" );
         }
 
         //将手指放在传感器上（或将卡刷卡到设备上）后，将触发此事件。
         //如果通过验证，返回值userid为用户注册号，否则返回值为-1；
         public void axCZKEM1_OnVerify(int iUserID)
         {
-            rtEventsMain.ShowMessage(machine.getMachinealias() + "RTEvent OnVerify Has been Triggered,Verifying..." );
+            rtEventsMain.ShowMessage(machine.getMachinealias() + ">指纹验证中,Verifying..." );
             if (iUserID != -1)
             {
-                rtEventsMain.ShowMessage("Verified OK,the UserID is " + iUserID.ToString());
+                rtEventsMain.ShowMessage(machine.getMachinealias() + ">验证 OK,the UserID is " + iUserID.ToString());
             }
             else
             {
-                rtEventsMain.ShowMessage("Verified Failed... ");
+                rtEventsMain.ShowMessage(machine.getMachinealias() + ">验证 Failed... ");
             }
         }
         //队列名称

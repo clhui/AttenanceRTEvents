@@ -477,6 +477,11 @@ namespace RTEvents
             notifyIcon1.Visible = false; //托盘图标bu可见 
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         /// <summary>
         /// ShowMessage重载
         /// </summary>

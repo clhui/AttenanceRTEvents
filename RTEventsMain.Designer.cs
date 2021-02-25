@@ -30,14 +30,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
             "123456,qweq",
             "12312",
             "2312312",
             "12312",
             "1231",
             "456"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new System.Windows.Forms.ListViewItem.ListViewSubItem[] {
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem(new System.Windows.Forms.ListViewItem.ListViewSubItem[] {
             new System.Windows.Forms.ListViewItem.ListViewSubItem(null, "时代大厦所多"),
             new System.Windows.Forms.ListViewItem.ListViewSubItem(null, "12312312"),
             new System.Windows.Forms.ListViewItem.ListViewSubItem(null, "312312"),
@@ -278,8 +278,8 @@
             this.machineListView.GridLines = true;
             this.machineListView.HideSelection = false;
             this.machineListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem9,
+            listViewItem10});
             this.machineListView.Location = new System.Drawing.Point(10, 29);
             this.machineListView.Name = "machineListView";
             this.machineListView.Size = new System.Drawing.Size(547, 425);
